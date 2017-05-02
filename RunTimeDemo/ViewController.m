@@ -7,7 +7,12 @@
 //
 
 #import "ViewController.h"
-
+#import <objc/objc-runtime.h>
+#import "Student.h"
+#import "NSObject+CSObject.h"
+#import "Student+Property.h"
+#import "DogFood.h"
+#import "Dog.h"
 @interface ViewController ()
 
 @end
@@ -16,7 +21,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSDictionary *dic = @{@"age":@"10",@"name":@"Tom",@"dogName":@"闪电",@"dogSunAge":@"1000",@"dog":@{@"dogName":@"闪电儿子",@"dogAge":@"1",@"dogFood":@{@"foodName":@"猫粮"}}};
+    Student *stu = [[Student alloc]initWithDict:dic];
+    stu.dogAge = 100;
+    NSLog(@"%@",[NSString jsonWithDict:dic]);
+    
+    NSLog(@"stu:%i,%@,%@",stu.age,stu.name,stu.dog);
+    NSLog(@"runtime动态添加属性%i",stu.dogAge);
+    [NSKeyedArchiver archiveRootObject:stu toFile:[NSString stringWithFormat:@"%@/nsk",NSHomeDirectory()]];
+    UIImage *image = [UIImage imageNamed:@"01.png"];
+    NSLog(@"%@",image);
+    
+    Student *stu2 = [Student modelWithDicts:dic];
+    NSLog(@"%@",stu2.dog.dogFood.foodName);
+    
 }
 
 
