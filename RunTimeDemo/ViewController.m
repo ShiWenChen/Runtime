@@ -19,6 +19,9 @@
 
 @implementation ViewController
 
++(void)load{
+    NSLog(@"viewcontrollerload");
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSDictionary *dic = @{@"age":@"10",@"name":@"Tom",@"dogName":@"闪电",@"dogSunAge":@"1000",@"dog":@{@"dogName":@"闪电儿子",@"dogAge":@"1",@"dogFood":@{@"foodName":@"猫粮"}}};

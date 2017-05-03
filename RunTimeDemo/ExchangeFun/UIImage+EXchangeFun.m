@@ -20,7 +20,7 @@
     Method imageNameMethod = class_getClassMethod(self, sel_registerName("imageNamed:"));
     
     //获取新方法
-    Method lnImageNameMethod = class_getClassMethod(self, @selector(ln_imageNamed:));
+    Method lnImageNameMethod = class_getClassMethod(self, @selector(myImageNamed:));
     
     //交换方法地址，相当于交换实现方式
     method_exchangeImplementations(lnImageNameMethod, imageNameMethod);
@@ -33,11 +33,11 @@
 /**
  新方法
 
- @param name 此时调用imageName:方法即为调用ln_imageName:,调用ln_imageName:方法即为调用系统的imageName:方法
+ @param name 此时调用imageName:方法即为调用myImageNamed:,调用myImageNamed:方法即为调用系统的imageName:方法
  @return 图片
  */
-+ (UIImage *)ln_imageNamed:(NSString *)name{
-    UIImage *image = [UIImage ln_imageNamed:name];
++ (UIImage *)myImageNamed:(NSString *)name{
+    UIImage *image = [UIImage myImageNamed:name];
     if (image) {
         NSLog(@"runtime获取成功");
         return image;
